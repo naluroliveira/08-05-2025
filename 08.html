@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>08/05/2025</title>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Montserrat&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(to bottom right, #8e61ee, #cb5bdf); /* Degradê suave entre lavanda e rosa claro */
+      font-family: 'Dancing Script', cursive;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* Efeito de estrelas ou corações flutuantes mais sutis */
+    .floating {
+      position: absolute;
+      font-size: 24px; /* Ícones pequenos para sutileza */
+      color: rgba(246, 181, 181, 0.7); /* Cor rosa suave */
+      opacity: 0;
+      animation: float 10s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+      }
+      50% {
+        transform: translateY(-100px) scale(1.2);
+        opacity: 0.8;
+      }
+      100% {
+        transform: translateY(-300px) scale(1);
+        opacity: 0;
+      }
+    }
+
+    .floating:nth-child(odd) {
+      animation-duration: 12s;
+      animation-delay: -2s;
+    }
+
+    .floating:nth-child(even) {
+      animation-duration: 8s;
+      animation-delay: -4s;
+    }
+
+    .container {
+      text-align: center;
+      z-index: 1;
+    }
+
+    .letter {
+      position: relative;
+      width: 300px;  /* Aumentei a largura da carta */
+      height: 400px; /* Aumentei a altura para comportar o texto */
+      background-color: #d8b4e2;
+      border-radius: 10px;
+      margin: 0 auto;
+      transition: transform 1s ease;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    }
+
+    .envelope-flap {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 300px;
+      height: 75px;
+      background-color: #c69bd3;
+      clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
+      transition: transform 1s ease;
+      transform-origin: top center;
+      z-index: 2;
+    }
+
+    .buttons {
+      margin-top: 30px;
+    }
+
+    .buttons button {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 16px;
+      background-color: #ffffffd4;
+      color: #8e44ad;
+      border: 2px solid #8e44ad;
+      padding: 10px 20px;
+      margin: 0 10px;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .buttons button:hover {
+      background-color: #8e44ad;
+      color: #fff;
+    }
+
+    .paper {
+      position: absolute;
+      top: 70px;
+      left: 15px;
+      width: 270px; /* Aumentei a largura do conteúdo */
+      height: 0;
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      overflow: hidden;
+      opacity: 0;
+      transition: height 1s ease, opacity 1s ease;
+      z-index: 1;
+      padding: 20px;
+      font-size: 16px; /* Ajustei o tamanho da fonte */
+      color: #6a1b9a;
+      line-height: 1.6; /* Melhorou a legibilidade */
+      text-align: left;
+      overflow-y: auto;
+    }
+
+    .paper.show {
+      height: 320px; /* Aumentei a altura do conteúdo */
+      opacity: 1;
+    }
+
+    .flap-open {
+      transform: rotateX(-180deg);
+    }
+
+    .message-alert {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: #ffffff;
+      padding: 20px 30px;
+      border: 2px solid #8e44ad;
+      border-radius: 10px;
+      color: #8e44ad;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 18px;
+      display: none;
+      z-index: 100;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    }
+
+    .counter {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: rgba(255, 255, 255, 0.8);
+      padding: 20px;
+      border-radius: 10px;
+      text-align: center;
+      color: #6a1b9a;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 24px;
+      display: none;
+      z-index: 101;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Animação suave para a carta desaparecer */
+    .letter.fade-out {
+      animation: fadeOut 1s forwards;
+    }
+
+    /* Animação suave para os botões desaparecerem */
+    .buttons.fade-out {
+      animation: fadeOut 1s forwards;
+    }
+
+    @keyframes fadeOut {
+      0% {
+        opacity: 1;
+        transform: scale(1);
+      }
+      100% {
+        opacity: 0;
+        transform: scale(0.5);
+      }
+    }
+
+  </style>
+</head>
+<body>
+  <!-- Ícones sutis flutuantes (estrelas ou corações) -->
+  <div class="floating" style="left: 10%; animation-duration: 12s;">&#9829;</div>
+  <div class="floating" style="left: 30%; animation-duration: 10s;">&#9829;</div>
+  <div class="floating" style="left: 50%; animation-duration: 14s;">&#9733;</div> <!-- Estrela, para variar -->
+  <div class="floating" style="left: 70%; animation-duration: 12s;">&#9829;</div>
+  <div class="floating" style="left: 90%; animation-duration: 11s;">&#9733;</div>
+
+  <div class="container">
+    <div class="letter" id="letter" onclick="closeLetter()">
+      <div class="envelope-flap" id="flap"></div>
+      <div class="paper" id="paper">
+        Hoje completamos dois anos juntos, e parece que o tempo voou... ao mesmo tempo em que sinto que te conheço desde sempre. Foram 730 dias de sorrisos, abraços, aprendizados e, principalmente, muito amor. 💖<br><br>
+
+        Você é o meu porto seguro, meu melhor amigo(a), minha paz e, ao mesmo tempo, minha maior aventura. Cada momento ao seu lado torna a vida mais leve, mais bonita e infinitamente mais especial.<br><br>
+
+        Obrigada(o) por estar comigo nos dias bons e, principalmente, nos dias difíceis. Por me apoiar, me ouvir, me fazer rir até a barriga doer e por ser exatamente quem você é: essa pessoa incrível que eu tenho o privilégio de amar.<br><br>
+
+        Que venham muitos e muitos anos pela frente — com sonhos realizados, planos feitos de mãos dadas e muito carinho compartilhado. Te amo mais a cada dia. Feliz 2 anos de nós! 💕
+      </div>
+    </div>
+
+    <div class="buttons" id="buttons">
+      <button onclick="openLetter()">Abrir</button>
+      <button onclick="showWarning()">Não abrir</button>
+    </div>
+  </div>
+
+  <div class="message-alert" id="alert">
+    Você não tem essa opção 😠
+  </div>
+
+  <div class="counter" id="counter">
+    <div id="time">Carregando...</div>
+  </div>
+
+  <script>
+    function openLetter() {
+      document.getElementById('flap').classList.add('flap-open');
+      document.getElementById('paper').classList.add('show');
+    }
+
+    // Função para fechar a carta
+    function closeLetter() {
+      // Adiciona animação de fade-out para a carta e os botões
+      document.getElementById('letter').classList.add('fade-out');
+      document.getElementById('buttons').classList.add('fade-out');
+
+      setTimeout(() => {
+        document.getElementById('paper').classList.remove('show');
+        document.getElementById('letter').style.display = 'none'; // Esconde a carta completamente
+        document.getElementById('buttons').style.display = 'none'; // Esconde os botões
+        document.getElementById('counter').style.display = 'block'; // Mostra o contador
+        updateCounter();
+      }, 1000); // Atraso para dar tempo da animação terminar
+    }
+
+    // Função para calcular o tempo desde 08/05/2023
+    function updateCounter() {
+      const startDate = new Date('2023-05-08');
+      const currentDate = new Date();
+
+      const diffTime = currentDate - startDate;
+      const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+      const diffMonths = Math.floor(diffDays / 30);  // Aproximação de meses
+      const diffHours = Math.floor(diffTime / (1000 * 60 * 60)) % 24;
+
+      document.getElementById('time').innerHTML = `${diffMonths} meses, ${diffDays} dias, ${diffHours} horas`;
+    }
+
+    // Função para mostrar alerta quando o botão "Não abrir" é clicado
+    function showWarning() {
+      const alertBox = document.getElementById('alert');
+      alertBox.style.display = 'block';
+      setTimeout(() => {
+        alertBox.style.display = 'none';
+      }, 2000);
+    }
+  </script>
+</body>
+</html>
